@@ -3,17 +3,33 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node server",
+    "server": "nodemon server"
   },
   "dependencies": {
+<<<<<<< HEAD
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "gravatar": "^1.8.0",
+=======
+    "D": "^1.0.0",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^5.0.1",
+    "config": "^3.2.4",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.16.4",
+    "express-validator": "^6.3.0",
+>>>>>>> 4e834c0f2919ad8e7f0ff0164b28b0be7b0c78fd
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "i": "^0.3.6",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.1",
+    "morgan": "~1.9.1",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
