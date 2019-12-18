@@ -1,11 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express-validator');
+const router = express.Router();
 const bcrypt= require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { check, validation } = require('express-validator/check');
+const { check, validationResult } = require('express-validator/check');
 
 const User = require('../models/User');
+
+// var router = require('express').Router(),
+//     User = require('../modules/User'),
+//     config = require('../../config');
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
