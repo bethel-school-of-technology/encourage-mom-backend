@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    UserId: {
+    
+     UserId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -31,8 +32,8 @@ const UserSchema = new mongoose.Schema({
     createdAt: {
         type: DataTypes.DATE,
         default: Date.now
-}
+} 
 });
 
-//Do I need this below??
-//module.exports = User = mongoose.model('user', UserSchema);
+
+module.exports = User = mongoose.model('user', UserSchema);
