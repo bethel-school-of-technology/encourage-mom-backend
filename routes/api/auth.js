@@ -28,8 +28,8 @@ router.get('/', auth, async (req, res) => {
 // @access Public
 
 router.post('/', [
-    check('Username', 'Username is Required').isUsername(),
-    // check('email', 'Please include a  valid email').isEmail(),
+    // check('Username', 'Username is Required').isUsername(),
+    check('email', 'Please include a  valid email').isEmail(),
     check('Password', 'Password is required').exists()
   ],
    async (req, res) => {
