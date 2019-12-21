@@ -33,3 +33,6 @@ const UserSchema = new mongoose.Schema({
         default: Date.now
 }
 });
+
+//Do I need this below??
+//module.exports = User = mongoose.model('user', UserSchema);
