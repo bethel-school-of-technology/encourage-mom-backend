@@ -41,35 +41,35 @@ const UserSchema = new mongoose.Schema({
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    UserId: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER
-    },
+    // UserId: {
+    //     allowNull: false,
+    //     autoIncrement: true,
+    //     primaryKey: true,
+    //     type: integ
+    // },
     FirstName: {
-        type: DataTypes.STRING,
+        type: String,
         unique: true
     },
     LastName: {
-        type: DataTypes.STRING,
+        type: String,
         unique: true,
     },
     Username: {
-        type: DataTypes.STRING,
+        type: String,
         unique: true,
         required: true,
     },
     Password: {
-        type: DataTypes.STRING,
+        type: String,
         required: true
     },
     Email: {
-        type: DataTypes.STRING,
+        type: String,
         unique: true,
     },
     createdAt: {
-        type: DataTypes.DATE,
+        type: Date,
         default: Date.now
 }
 });

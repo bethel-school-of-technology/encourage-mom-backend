@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 {
     "mongoURI": "mongodb+srv://bumpjas:Jb@7154853400@encouraging-moms-ywdax.mongodb.net/test?retryWrites=true&w=majority",
     "jwtSecret": "mySecretToken"
 }
+=======
+{
+    "mongoURI": "mongodb+srv://bumpjas:Jb@7154853400@encouraging-moms-ywdax.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mySecretToken"
+}
+
+>>>>>>> 3eccf8709be0925f6cfbf4994fd9d9d02ae7c26f

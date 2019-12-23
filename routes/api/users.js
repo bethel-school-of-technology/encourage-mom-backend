@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 var express = require('express');
 var router = express.Router();
 const bcrypt= require('bcryptjs');
@@ -90,28 +91,29 @@ router.post('/login', [
 module.exports = router;
 =======
 const express = require('express','express-validator');
+=======
+const express = require('express');
+>>>>>>> 3eccf8709be0925f6cfbf4994fd9d9d02ae7c26f
 const router = express.Router();
 const bcrypt= require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator/check');
 
+<<<<<<< HEAD
 
 // var router = require('express').Router(),
 //     User = require('../modules/User'),
 //     config = require('../../config');
+=======
+const User = require('../../models/User')
+>>>>>>> 3eccf8709be0925f6cfbf4994fd9d9d02ae7c26f
 
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/', (req, res) => res.send('User route'));
 
-router.get('/signup', function(req, res, next) {
-  res.render('signup')
-})
-
-router.post('/signup', [
+router.post('/', [
   check('FirstName', 'First Name is required').not().isEmpty(),
   check('LastName', 'Last Name is required').not().isEmpty(),
   check('Email', 'Please include a valid email').not().isEmpty(),
@@ -169,16 +171,20 @@ router.post('/signup', [
     }
 })
 
-router.get('/login', function(req, res, next) {
-  res.render('login')
-})
+// router.get('/login', function(req, res, next) {
+//   res.render('login')
+// })
 
-router.post('/login', [
-  check('Username', 'Username is Required').not().isEmpty(),
-  check('Password', 'Password is Required').not().isEmpty(),
-], (req, res) => {
+// router.post('/login', [
+//   check('Username', 'Username is Required').not().isEmpty(),
+//   check('Password', 'Password is Required').not().isEmpty(),
+// ], (req, res) => {
 
-})
+// })
 
+<<<<<<< HEAD
 module.exports = router;
 >>>>>>> dev
+=======
+ module.exports = router;
+>>>>>>> 3eccf8709be0925f6cfbf4994fd9d9d02ae7c26f
