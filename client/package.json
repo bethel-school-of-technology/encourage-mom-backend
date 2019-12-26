@@ -1,0 +1,14 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "node": "^13.5.0",
+    "nodemon": "^2.0.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0",
+    "server": "^1.0.21",
+    "start": "^5.1.0"
+  }
+}
