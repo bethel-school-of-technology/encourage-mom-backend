@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const gravatar = require('gravatar');
+// const gravatar = require('gravatar');
 const bcryptjs = require('bcryptjs');
 const {
     check,
@@ -24,7 +24,8 @@ router.post('/',
             min: 6
         })
 
-    ], (req, res) => {
+    ],
+    async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({
