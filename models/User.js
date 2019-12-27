@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    
-    //  UserId: {
+    // UserId: {
     //     allowNull: false,
     //     autoIncrement: true,
     //     primaryKey: true,
-    //     type: DataTypes.INTEGER
+    //     type: integ
     // },
     FirstName: {
         type: String,
@@ -32,8 +31,7 @@ const UserSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
-} 
+}
 });
-
 
 module.exports = User = mongoose.model('user', UserSchema);
