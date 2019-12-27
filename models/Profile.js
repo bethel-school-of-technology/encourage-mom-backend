@@ -6,28 +6,28 @@ const ProfileSchema = new mongoose.Schema({
         ref: 'user'
     },
     FirstName: {
-        type: DataTypes.STRING,
+        type: String,
         unique: true
     },
     LastName: {
-        type: DataTypes.STRING,
+        type: String,
         unique: true,
     },
     Username: {
-        type: DataTypes.STRING,
+        type: String,
         unique: true,
         required: true,
     },
     Password: {
-        type: DataTypes.STRING,
+        type: String,
         required: true
     },
     Email: {
-        type: DataTypes.STRING,
+        type: String,
         unique: true,
     },
     createdAt: {
-        type: DataTypes.DATE,
+        type: String,
         default: Date.now
 }
 });
