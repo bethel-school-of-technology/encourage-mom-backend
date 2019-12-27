@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-const express = require('express');
-const router = express.Router();
 
-// @route   GET api/auth
-// @desc    Test route
-// @access  Public
-router.get('/', (req, res) => res.send('Auth route'));
-
-=======
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs')
@@ -33,9 +24,6 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
->>>>>>> dev
-=======
 // @route POST api/auth
 // @desc Authenticate user & get token
 // @access Public
@@ -92,5 +80,4 @@ router.post('/', [
       }
   })
 
->>>>>>> 3eccf8709be0925f6cfbf4994fd9d9d02ae7c26f
 module.exports = router;
