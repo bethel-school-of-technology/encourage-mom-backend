@@ -7,12 +7,6 @@
     "server": "nodemon server"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "bcryptjs": "^2.4.3",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-=======
     "D": "^1.0.0",
     "audit": "0.0.6",
     "bcryptjs": "^2.4.3",
@@ -23,7 +17,6 @@
     "express": "^4.17.1",
     "express-validator": "^6.3.0",
     "fix": "0.0.6",
->>>>>>> 4164bb8049ec469be35815deff999b6745d534d5
     "gravatar": "^1.8.0",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
