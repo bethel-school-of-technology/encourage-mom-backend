@@ -1,16 +1,23 @@
 {
   "name": "encourage-moms-backend",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
+  "main": "server.js",
   "scripts": {
     "start": "node server",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  
   },
   "dependencies": {
     "D": "^1.0.0",
     "audit": "0.0.6",
     "bcryptjs": "^2.4.3",
+<<<<<<< HEAD
     "concurrently": "^5.0.2",
+=======
+>>>>>>> 32a37122b930af4ff9f95552f27614c603198062
     "config": "^3.2.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -27,6 +34,7 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "concurrently": "^5.0.2"
   }
 }
