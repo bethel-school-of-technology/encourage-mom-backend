@@ -1,0 +1,141 @@
+body {
+    background-color: #b19cd9
+}
+
+header {
+    background-color: rgba(223, 233, 233, 0.226);
+    padding: -15px;
+    margin: -10px;
+    text-align: center;
+}
+
+li > h1 {
+    float: left;
+    margin: 1px;
+    padding: 1px;
+    font-size: 60px;
+    font-weight: bolder;
+    padding-left: 10px
+}
+
+nav > li {
+    float: right;
+}
+
+a {
+    text-decoration: none;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+}
+
+
+nav > a:hover {
+    background-color: lightgray;
+}
+
+ /* a > .active {
+    background-color: lightpink;
+} */
+
+ul {
+    list-style-type: none;
+    overflow: hidden;
+
+  }
+
+li {
+    float: left;
+    padding-top: 20px;
+  }
+
+li a {
+    font-size: 30px;
+    font-weight: bold;
+
+}
+ 
+.dropdown-content > a {
+    font-size: 15px;
+    font-weight: bold
+}
+li a, .dropbtn {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    
+}
+li > a:hover{
+    /* background-color: rgba(211, 211, 211, 0.507); */
+    color: palevioletred;
+    padding: 20px;
+    text-align: center;
+
+}
+
+.dropdown:hover .dropbtn{
+    background-color: rgba(211, 211, 211, 0.507);
+    color: palevioletred;
+    
+}
+li.dropdown {
+    display: inline-block;
+}
+
+li > .nav-right:hover{
+    background-color: rgba(211, 211, 211, 0.507);
+    text-align: justify;
+    color: palevioletred;
+    
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1; 
+    /* min-width: 160px; */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 4px, 6px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover{
+    background-color: lightgray
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    display: center;
+    width: 99px
+  }
+
+li {
+    text-decoration: none;
+}
+
+
+nav ul li:first-child{
+    float: left
+}
+
+ nav ul li  {
+    float: right;
+}
+
+.landing{
+    text-align: center;
+    background-color: rgba(223, 233, 233, 0.226);
+    padding: 5px;
+
+}
