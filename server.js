@@ -1,5 +1,6 @@
 const express = require('express');
 const connectDB = require('./config/db');
+const cors = requrire('cors');
 
 const path = require('path');
 
@@ -16,6 +17,8 @@ app.use(express.json({
 app.get('/', (req, res) => res.send('API Running'));
 
 // Define Routes
+app.use(cors());
+app.options('*', cors());
 app.use('/api/users', require('./routes/api/users'));
 <<<<<<< HEAD
 app.use('/api/posts', require('./routes/api/posts'));
