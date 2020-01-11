@@ -1,5 +1,4 @@
-{
-  "name": "encourage-moms-backend",
+  {"name": "encourage-moms-backend",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -20,9 +19,9 @@
     "http-errors": "~1.6.3",
     "i": "^0.3.6",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.2",
+    "mongoose": "^5.8.2", 
     "morgan": "~1.9.1",
-    "request": "^2.88.0"
+     "request": "^2.88.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

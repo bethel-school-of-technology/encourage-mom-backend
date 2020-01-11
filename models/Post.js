@@ -12,11 +12,12 @@ const PostSchema = new Schema ({
     },
     name: {
         stype: String,
-        required: true
+        // required: true,
+
     },
-    avatar: {
-        type: String
-    },
+    // avatar: {
+    //     type: String
+    // },
     likes: [
         {
         user: {
