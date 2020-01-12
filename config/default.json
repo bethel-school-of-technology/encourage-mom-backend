@@ -1,3 +1,5 @@
 {
-    "mongoURI": "mongodb+srv://bumpjas:Jb@7154853400@encouraging-moms-ywdax.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://bumpjas:Jb@7154853400@encouraging-moms-ywdax.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mySecretToken"
 }
+
