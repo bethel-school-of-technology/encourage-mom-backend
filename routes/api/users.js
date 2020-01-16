@@ -1,4 +1,3 @@
-
 var express = require('express');
 var router = express.Router();
 const bcrypt= require('bcryptjs');
@@ -88,4 +87,3 @@ router.post('/signup', [
 // })
 
  module.exports = router;
-
