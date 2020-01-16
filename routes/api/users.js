@@ -76,16 +76,16 @@ router.post('/signup', [
     }
 })
 
-router.get('/login', function(req, res, next) {
-  res.render('login')
-})
+// router.get('/login', function(req, res, next) {
+//   res.render('login')
+// })
 
-router.post('/login', [
-  check('Username', 'Username is Required').not().isEmpty(),
-  check('Password', 'Password is Required').not().isEmpty(),
-], (req, res) => {
+// router.post('/login', [
+//   check('Username', 'Username is Required').not().isEmpty(),
+//   check('Password', 'Password is Required').not().isEmpty(),
+// ], (req, res) => {
 
-})
+// })
 
  module.exports = router;
 

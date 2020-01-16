@@ -30,8 +30,8 @@ router.get('/', auth, async (req, res) => {
 
 router.post('/', [
     // check('Username', 'Username is Required').isUsername(),
-    check('email', 'Please include a  valid email').isEmail(),
-    check('Password', 'Password is required').exists()
+    check('username', 'Please include a  valid username').exists(),
+    check('password', 'Password is required').exists()
   ],
    async (req, res) => {
         const errors = validationResult(req)
@@ -39,10 +39,10 @@ router.post('/', [
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { Username, Password } = req.body;
+        const { username, password } = req.body;
 
         try {
-            let user = await User.findOne({ email })
+            let user = await User.findOne({ username})
 
         if(!user) {
             return res
