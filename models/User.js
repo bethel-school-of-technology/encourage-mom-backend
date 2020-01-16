@@ -5,8 +5,12 @@ const UserSchema = new mongoose.Schema({
     //     allowNull: false,
     //     autoIncrement: true,
     //     primaryKey: true,
-    //     type: integ
+
     // },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
     FirstName: {
         type: String,
         unique: true
@@ -32,6 +36,7 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
 }
+
 });
 
 module.exports = User = mongoose.model('user', UserSchema);
