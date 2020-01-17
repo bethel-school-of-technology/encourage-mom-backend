@@ -4,7 +4,7 @@ const bcrypt= require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 //This Error thrown in Terminal so updated below: express-validator: requires to express-validator/check are deprecated.You should just use require("express-validator") instead.
-const { check, validation } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 
 const User = require('../../models/User')
 

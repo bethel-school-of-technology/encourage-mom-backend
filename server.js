@@ -1,10 +1,8 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
-
-const path = require('path');
-
 const app = express();
+// const path = require('path');
 
 // Connect Database
 connectDB();
@@ -20,19 +18,17 @@ app.get('/', (req, res) => res.send('API Running'));
 app.use(cors());
 app.options('*', cors());
 app.use('/api/users', require('./routes/api/users'));
-<<<<<<< HEAD
 app.use('/api/posts', require('./routes/api/posts'));
-=======
-app.use('/api/post', require('./routes/api/posts'));
->>>>>>> 32a37122b930af4ff9f95552f27614c603198062
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/auth', require('./routes/api/auth'));
 
 const PORT = process.env.PORT || 5000;
 
-const server = app.listen(PORT, () => 
+// const server = 
+
+app.listen(PORT, () => 
 console.log(`Server started on port ${PORT}`));
 
 
 
-module.exports = server;
+// module.exports = server;
