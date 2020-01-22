@@ -1,38 +1,33 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    // UserId: {
-    //     allowNull: false,
-    //     autoIncrement: true,
-    //     primaryKey: true,
 
-    // },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
-    FirstName: {
+    firstName: {
         type: String,
         unique: true
     },
-    LastName: {
+    lastName: {
         type: String,
         unique: true,
     },
-    Username: {
+    username: {
         type: String,
         unique: true,
         required: true,
     },
-    Password: {
+    password: {
         type: String,
         required: true
     },
-    Email: {
+    email: {
         type: String,
         unique: true,
     },
-    createdAt: {
+    date: {
         type: Date,
         default: Date.now
 }

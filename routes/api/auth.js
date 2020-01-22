@@ -5,8 +5,7 @@ const bcrypt = require('bcryptjs')
 const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { check, validationResult } = require('express-validator/check');
-
+const { check, validationResult } = require('express-validator');
 const User = require('../../models/User')
 
 // @route   GET api/auth
@@ -35,7 +34,7 @@ router.post('/', [
    async (req, res) => {
         const errors = validationResult(req)
         if(!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.json({ errors: errors.array() });
         }
 
         const { username, password } = req.body;
