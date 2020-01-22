@@ -13,9 +13,9 @@ app.use(express.json({
 }));
 
 app.get('/', (req, res) => res.send('API Running'));
-app.get('/api/auth', (req, res) => {
-    res.send({ express: 'Hello From auth file' });
-  });
+// app.get('/api/auth', (req, res) => {
+//     res.send({ express: 'Hello From auth file' });
+//   });
 
 // Define Routes
 
