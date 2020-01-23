@@ -18,11 +18,11 @@ router.get('/signup', function(req, res, next) {
 })
 
 router.post('/signup', [
-  check('FirstName', 'First Name is required').not().isEmpty(),
-  check('LastName', 'Last Name is required').not().isEmpty(),
-  check('Email', 'Please include a valid email').not().isEmpty(),
-  check('Username', 'Username is Required').not().isEmpty(),
-  check('Password', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
+  check('firstName', 'First Name is required').not().isEmpty(),
+  check('lastName', 'Last Name is required').not().isEmpty(),
+  check('email', 'Please include a valid email').not().isEmpty(),
+  check('username', 'Username is Required').not().isEmpty(),
+  check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
 ],
  async (req, res) => {
     const errors = validationResult(req)
@@ -40,11 +40,11 @@ router.post('/signup', [
       }
 
       user = new User ({
-          FirstName,
-          LastName,
-          Email,
-          Username,
-          Password
+          firstName,
+          lastName,
+          email,
+          username,
+          password
       });
 
       const salt = await bcrypt.genSalt(10);
