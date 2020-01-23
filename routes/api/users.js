@@ -27,7 +27,7 @@ router.post('/signup', [
  async (req, res) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.json({ errors: errors.array() });
     }
 
     const {FirstName, LastName, Email, Username, Password } = req.body;
@@ -74,16 +74,5 @@ router.post('/signup', [
       res
     }
 })
-
-// router.get('/login', function(req, res, next) {
-//   res.render('login')
-// })
-
-// router.post('/login', [
-//   check('Username', 'Username is Required').not().isEmpty(),
-//   check('Password', 'Password is Required').not().isEmpty(),
-// ], (req, res) => {
-
-// })
 
  module.exports = router;
