@@ -5,6 +5,8 @@ const {
     check,
     validationResult
 } = require('express-validator');
+
+
 const auth = require('../../middleware/auth');
 const Post = require('../../models/Post');
 const User = require('../../models/User');
@@ -15,8 +17,8 @@ const User = require('../../models/User');
 // @access  Private
 
 
-router.get('/', (req, res) => res.send('Posts route'));
-module.exports = router;
+// router.get('/', (req, res) => res.send('Posts route'));
+// module.exports = router;
 
 router.post('/' [auth, [check('text', 'Text is required').not().isEmpty]],
     async (req, res) => {
@@ -93,28 +95,28 @@ router.delete('/:id', auth, async (req, res) => {
     }
 });
 
-// @route PUT api/posts/like/:id
-// @desc Like a post
-// @access Private
+// // @route PUT api/posts/like/:id
+// // @desc Like a post
+// // @access Private
 
-router.put('/like/:/id', auth, async (req, res) => {});
+// router.put('/like/:/id', auth, async (req, res) => {});
 
-// @route PUT api/posts/unlike/:id
-// @desc unlike
-// @access Private
+// // @route PUT api/posts/unlike/:id
+// // @desc unlike
+// // @access Private
 
-router.put('/unlike/:id', auth, async (req, res) => {});
+// router.put('/unlike/:id', auth, async (req, res) => {});
 
-// @route POST api/posts/comment/:id
-// @desc Comment on a post
-// @access Private
+// // @route POST api/posts/comment/:id
+// // @desc Comment on a post
+// // @access Private
 
-router.post('/comment/:id', auth, async (req, res) => {});
+// router.post('/comment/:id', auth, async (req, res) => {});
 
-// @route DELETE api/posts/comment/:id/:comment_id
-// @desc Delete  comment
-// @access Private 
+// // @route DELETE api/posts/comment/:id/:comment_id
+// // @desc Delete  comment
+// // @access Private 
 
-router.delete('/comment/:id/:comment_id', auth, async (req, res) => {})
+// router.delete('/comment/:id/:comment_id', auth, async (req, res) => {})
 
 module.exports = router;
