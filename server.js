@@ -3,7 +3,14 @@ const connectDB = require('./config/db');
 const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
+const dotenv = require("dotenv");
 // const path = require('path');
+
+// const auth = require("./routes/api/auth");
+// const users = require("./routes/api/users");
+// const profile = require("./routes/api/profile");
+// const posts = require("./routes/api/posts")
+
 
 mongoose.connect(
   'mongodb+srv://jhpkinsinger02:Gr8ontheSq@encouraging-moms-ywdax.mongodb.net/test?retryWrites=true&w=majority',
