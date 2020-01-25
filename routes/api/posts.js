@@ -95,28 +95,28 @@ router.delete('/:id', auth, async (req, res) => {
     }
 });
 
-// // @route PUT api/posts/like/:id
-// // @desc Like a post
-// // @access Private
+// @route PUT api/posts/like/:id
+// @desc Like a post
+// @access Private
 
-// router.put('/like/:/id', auth, async (req, res) => {});
+router.put('/like/:/id', auth, async (req, res) => {});
 
-// // @route PUT api/posts/unlike/:id
-// // @desc unlike
-// // @access Private
+// @route PUT api/posts/unlike/:id
+// @desc unlike
+// @access Private
 
-// router.put('/unlike/:id', auth, async (req, res) => {});
+router.put('/unlike/:id', auth, async (req, res) => {});
 
-// // @route POST api/posts/comment/:id
-// // @desc Comment on a post
-// // @access Private
+// @route POST api/posts/comment/:id
+// @desc Comment on a post
+// @access Private
 
-// router.post('/comment/:id', auth, async (req, res) => {});
+router.post('/comment/:id', auth, async (req, res) => {});
 
-// // @route DELETE api/posts/comment/:id/:comment_id
-// // @desc Delete  comment
-// // @access Private 
+// @route DELETE api/posts/comment/:id/:comment_id
+// @desc Delete  comment
+// @access Private 
 
-// router.delete('/comment/:id/:comment_id', auth, async (req, res) => {})
+router.delete('/comment/:id/:comment_id', auth, async (req, res) => {})
 
 module.exports = router;

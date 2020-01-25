@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 //This Error thrown in Terminal so updated below: express-validator: requires to express-validator/check are deprecated.You should just use require("express-validator") instead.
 const {check, validationResult } = require('express-validator');
-
 const User = require('../../models/User')
 
 /* GET users listing. */
@@ -24,6 +23,7 @@ router.post('/signup', [
   check('username', 'Username is Required').not().isEmpty(),
   check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
 ],
+
  async (req, res) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()) {

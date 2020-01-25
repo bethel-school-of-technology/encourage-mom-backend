@@ -2,10 +2,18 @@ const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
 const app = express();
+const mongoose = require('mongoose');
 // const path = require('path');
 
+mongoose.connect(
+  'mongodb+srv://jhpkinsinger02:Gr8ontheSq@encouraging-moms-ywdax.mongodb.net/test?retryWrites=true&w=majority',
+  { useNewUrlParser: true },
+  () => console.log('connected to db')
+);
+
+
 // Connect Database
-connectDB();
+// connectDB();
 app.use(cors());
 // Init Middleware
 app.use(express.json({
@@ -18,6 +26,7 @@ app.get('/api/auth', (req, res) => {
   });
 
 // Define Routes
+
 
 app.options('*', cors());
 app.use('/api/users', require('./routes/api/users'));
