@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 // const path = require('path');
 
 // const auth = require("./routes/api/auth");
-// const users = require("./routes/api/users");
+const users = require("./routes/api/users");
 // const profile = require("./routes/api/profile");
 // const posts = require("./routes/api/posts")
 
@@ -28,15 +28,16 @@ app.use(express.json({
 }));
 
 app.get('/', (req, res) => res.send('API Running'));
-app.get('/api/auth', (req, res) => {
-    res.send({ express: 'Hello From auth file' });
-  });
+// app.get('/api/auth', (req, res) => {
+//     res.send({ express: 'Hello From auth file' });
+//   });
 
 // Define Routes
 
 
 app.options('*', cors());
 app.use('/api/users', require('./routes/api/users'));
+// app.use('/api/users', require(users));
 // app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/auth', require('./routes/api/auth'));

@@ -5,24 +5,26 @@ const ProfileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
-    FirstName: {
-        type: String,
-        unique: true
-    },
-    LastName: {
+    firstName: {
         type: String,
         unique: true,
+        required: true
     },
-    Username: {
+    lastName: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    username: {
         type: String,
         unique: true,
         required: true,
     },
-    Password: {
+    password: {
         type: String,
         required: true
     },
-    Email: {
+    email: {
         type: String,
         unique: true,
     },
