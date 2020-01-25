@@ -27,20 +27,17 @@ router.get('/', auth, async (req, res) => {
 // @desc Authenticate user & get token
 // @access Public
 
-router.post('/', [
-    check('username', 'Username is required').exists(),
-    check('password', 'Password is required').exists()
-  ],
+
+router.post('/login', 
    async (req, res) => {
-        const errors = validationResult(req)
+        const errors = validationResult(req.body)
         if(!errors.isEmpty()) {
             return res.json({ errors: errors.array() });
         }
 
-        const { username, password } = req.body;
 
         try {
-            let user = await User.findOne({ username})
+            let user = await User.findOne({ username: req.body.username})
 
         if(!user) {
             return res
@@ -49,13 +46,14 @@ router.post('/', [
         }
 
 
-    const isMatch= await bcrypt.compare(password, user.password);
+    const isMatch= await bcrypt.compare(req.body.password, user.password);
 
         if(!isMatch){
             return res
-            // .status(400)
-            .json({ errors: [ { msg: 'Invalid Credentials'}] });
+            .status(400)
+            .json({ errors: [ { msg: 'Username or Password is wrong'}] });
           }
+          
 
         const payload = {
           user: {
@@ -76,6 +74,9 @@ router.post('/', [
         console.error(err.message);
         res.status(500).send('Server error');
       }
+
+      const token = user.generateAuthToken();
+      res.send(token);
   })
 
 module.exports = router;
