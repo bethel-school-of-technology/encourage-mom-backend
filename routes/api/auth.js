@@ -12,17 +12,17 @@ const User = require('../../models/User')
 // @desc    Test route
 // @access  Public
 
-router.get('/', auth, async (req, res) => {
-    try {
-        const user = await User.findById(req.user.id).select('-password');
-        res.json(user)
-        console.log(user);
-      } catch(err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+// router.get('/', auth, async (req, res) => {
+//     try {
+//         const user = await User.findById(req.user.id).select('-password');
+//         res.json(user)
+//         console.log(user);
+//       } catch(err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
 
-    }
-});
+//     }
+// });
 
 // @route POST api/auth
 // @desc Authenticate user & get token
@@ -48,7 +48,7 @@ router.post('/',
         }
 
 
-    const isMatch= await bcrypt.compare(password, user.password);
+    const isMatch= await bcrypt.compare(req.body.password, user.password);
         if(!isMatch){
             return res
             .status(400)
