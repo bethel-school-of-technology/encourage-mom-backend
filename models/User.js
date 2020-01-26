@@ -3,20 +3,12 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
-        unique: true
-    },
     firstName: {
         type: String,
-        unique: true,
         required: true
     },
     lastName: {
         type: String,
-        unique: true,
         required: true
     },
     username: {
@@ -31,51 +23,29 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
-    },
-    date: {
-        type: Date,
-        default: Date.now
-}
+    }
+    // ,
+    // isAdmin: Boolean
 });
 
-module.exports = User = mongoose.model('user', UserSchema, 'user');
-
-// // const UserModel = mongoose.model('User', new Schema({
-// //     name: String,
-// //     email: {
-// //       type: String,
-// //       unique: true
-// //     }
-// //   }));
-  
-//   // Wait for the index to build. The index name will be `email_1`
-//   await User.init();
-  
-//   // Create a document with no `email` set
-//   await User.create({ name: 'user 1' });
-  
-//   try {
-//     await User.create({ name: 'user 2' });
-//   } catch (error) {
-//     // E11000 duplicate key error collection: test.users index: email_1
-//     // dup key: { : null }
-//     error.message;
-//   }
+module.exports = User = mongoose.model('user', UserSchema);
 
 
+// const config = require("config");
+// const jwt = require('jsonwebtoken');
+// const Joi = require("joi");
+// const mongoose = require("mongoose");
 
-// const UserSchema = mongoose.model('User', new Schema({
-//         // user: {
-//     //     type: mongoose.Schema.Types.ObjectId,
-//     //     ref: 'user'
-//     // },
+// const UserSchema = new mongoose.Schema({
 //     firstName: {
 //         type: String,
-//         // unique: true
+//         unique: true,
+//         required: true
 //     },
 //     lastName: {
 //         type: String,
-//         // unique: true,
+//         unique: true,
+//         required: true
 //     },
 //     username: {
 //         type: String,
@@ -90,25 +60,36 @@ module.exports = User = mongoose.model('user', UserSchema, 'user');
 //         type: String,
 //         unique: true,
 //     },
-//     date: {
-//         type: Date,
-//         default: Date.now
-// }
-// }))
+//     isAdmin: Boolean
+// });
 
-// const schema = new Schema({ name: String });
-// schema.plugin(require('mongoose-beautiful-unique-validation'));
-
-// const CharacterModel = mongoose.model('Character', schema);
-
-// const doc = await CharacterModel.create({ name: 'Jon Snow' });
-
-// try {
-//   // Try to create a document with the same `_id`. This will always fail
-//   // because MongoDB collections always have a unique index on `_id`.
-//   await CharacterModel.create(Object.assign({}, doc.toObject()));
-// } catch (error) {
-//   // Path `_id` (5cc60c5603a95a15cfb9204d) is not unique.
-//   error.errors['_id'].message;
+// UserSchema.methods.generateAuthToken = function() {
+//     const token = jwt.sign (
+//         {_id: this._id, isAdmin: this.isAdmin},
+//         config.get("jwtPrivateKey")
+//     )
+//     return token;
 // }
 
+// const User = mongoose.model("User", UserSchema)
+
+// function validateUser(user) {
+    //     const schema = {
+//         firstName: Joi.string()
+//             .required(),
+//         lastName: Joi.string()
+//             .required(),
+//         email: Joi.string()
+//             .required()
+//             .email(),
+//         username: Joi.string()
+//             .required(),
+//         passowrd: Joi.string()
+//             .required()
+//             .min(6)
+//     };
+//     return Joi.validate(user, schema);
+// }
+
+// exports.User = User;
+// export.validate = validateUser;  
