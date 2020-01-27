@@ -36,8 +36,12 @@ router.post('/',
             return res.json({ errors: errors.array() });
         }
 
-        user = await User.findOne({ username: req.body.username});
-          console.log("Test")
+        try {
+          console.log(req.body);
+     
+
+        let user = await User.findOne({ username: req.body.username});
+          console.log("Test1")
           console.log(user)
 
         if(!user) {
@@ -70,6 +74,11 @@ router.post('/',
             if(err) throw err;
             res.json({ token });
       })
-  })
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+  
+     })
 
 module.exports = router;
