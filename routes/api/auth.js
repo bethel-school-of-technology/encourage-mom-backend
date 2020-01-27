@@ -44,6 +44,8 @@ router.post('/',
           console.log("Test1")
           console.log(user)
 
+          
+
         if(!user) {
           console.log("Test2")
             return res
