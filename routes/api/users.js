@@ -9,10 +9,20 @@ const { validationResult } = require('express-validator');
 const User = require('../../models/User')
 
 /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
+router.get('/',  function(req, res, next) {
+  res.send('respond with a resource');
+});
+
+// // get all users
+// router.get("/", auth, async (req, res) => {
+//   const users = await User.find().sort("name");
+//   res.send(users);
 // });
 
+router.get('/me', auth, async (req, res) => {
+    const user = await User.findById(req.user.id).select('-password');
+    res.send(user);
+});
 
 router.post('/signup', 
 

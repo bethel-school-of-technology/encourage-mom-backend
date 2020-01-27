@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 
 // const auth = require("./routes/api/auth");
 const users = require("./routes/api/users");
-// const profile = require("./routes/api/profile");
+const profile = require("./routes/api/profile");
 // const posts = require("./routes/api/posts")
 
 
