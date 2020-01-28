@@ -53,20 +53,16 @@ router.put('/:id', async (req, res) => {
         req.params.id,
         {
             title: req.body.title,
-            text: req.body.bio
+            text: req.body.text
         },
-        { new:true}
     );
-    
-    // if (!profile) return res.status(404).send("Invalid Credentials")
-    // res.send(profile)
-    if (post.username == req.body.username) {
-        await post.save()
-        res.send(post)
-    } else {
-        return res.status(404).send("Invalid Credentials")
-    }
-    console.log("test_3")
-    })
+    console.log("Test5");
+    console.log(req.params.id);
+    console.log(post);
+    if (!post) return res.status(404).send("Invalid Credentials")
+    post.save()
+    res.send(post)
+})
+
 
 module.exports = router
