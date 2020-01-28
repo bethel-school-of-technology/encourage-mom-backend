@@ -7,7 +7,7 @@ const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
-router.get('/', auth, async (req, res) => {
+router.get('/',  async (req, res) => {
     const profiles = await Profile.find().sort("name");
     res.send(profiles);
 });
@@ -48,5 +48,31 @@ try {
   res.status(500).send('Server Error');
     }
 })
+
+router.put('/:id', async (req, res) => {
+    const { error } = validationResult(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+
+    const profile = await Profile.findByIdAndUpdate(
+        req.params.id,
+        {
+            location: req.body.location,
+            bio: req.body.bio
+        },
+        { new:true}
+    );
+    
+    // if (!profile) return res.status(404).send("Invalid Credentials")
+    // res.send(profile)
+    if (profile.username == req.body.username) {
+        await profile.save()
+        res.send(profile)
+    } else {
+        return res.status(404).send("Invalid Credentials")
+    }
+    console.log("test_3")
+
+
+    })
 
 module.exports = router
