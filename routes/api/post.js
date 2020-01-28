@@ -63,6 +63,19 @@ router.put('/:id', async (req, res) => {
     post.save()
     res.send(post)
 })
+router.delete('/:id', async (req, res) => {
+    // try {
+        const post = await Post.findByIdAndRemove(req.params.id)
+        console.log(req.params.id)
+        console.log(post);
+        if (!post) {
+            return res.status(404).json({msg: 'Post not found'})
+        }
+
+        res.json({
+            msg: 'Post Removed'
+        });
+} )
 
 
 module.exports = router
