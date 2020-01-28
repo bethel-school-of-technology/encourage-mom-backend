@@ -12,6 +12,22 @@ router.get('/',  async (req, res) => {
     res.send(profiles);
 });
 
+router.get('/:id', async (req, res) => {
+    try {
+      const profile = await Profile.findById(req.params.id);
+  
+      if (!profile) {
+        return res.status(404).json({
+          msg: 'Profile not found'
+        });
+      }
+  
+      res.json(profile);
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
 router.post('/', async(req, res) => {
     const {error} = validationResult(req.body);
     if (error){
@@ -84,4 +100,7 @@ router.delete('/:id', async (req, res) => {
             msg: 'Profile Removed'
         });
 } )
+
+
+  
 module.exports = router
