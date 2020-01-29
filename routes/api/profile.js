@@ -1,132 +1,126 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+// const mongoose = require("mongoose");
+const { validationResult } = require('express-validator');
+const Profile = require("../../models/Profile");
 const auth = require('../../middleware/auth');
-const { check, validationResult } = require('express-validator');
+const admin = require('../../middleware/admin');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
-const Profile = require('../../models/Profile');
-const User = require('../../models/User');
 
+router.get('/',  async (req, res) => {
+    const profiles = await Profile.find().sort("name");
+    res.send(profiles);
+});
 
-// @route   GET api/profile/me
-// @desc    Get current users profile
-// @access  Private
 router.get('/me', auth, async (req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar']);
-     
-        if(!profile) {
-            return res.status(400).json({ msg: 'There is no profile for this user' });
-        }
-
+        const profile = await (await Profile.findOne({user: req.user.id}))
+        // .populate(
+        //     'user',
+        //     ['username']
+        // );
+        console.log("successsssss!")
         res.json(profile);
-    }   catch(err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+        console.log(profile)
+    } catch(err) {
+        console.error(err.mesage);
+        console.log("fail!!!")
+        res.status(500).send('Server Error')
     }
-});
+})
 
-// @route   POST api/profile
-// @desc    Create or update user profile
-// @access  Private
-router.post('/', [ auth, [
-    check('status', 'Status is required').not().isEmpty(),
+router.get('/:id', async (req, res) => {
+    try {
+      const profile = await Profile.findById(req.params.id);
+  
+      if (!profile) {
+        return res.status(404).json({
+          msg: 'Profile not found'
+        });
+      }
+  
+      res.json(profile);
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
+
+router.post('/', async(req, res) => {
+    const {error} = validationResult(req.body);
+    if (error){
+        console.log("test1");     
+        return res.status(400).send(error.details[0].message)
+        }
+try {
+    let profile = await User.findOne({username: req.body.username})
+    console.log(profile)
+
+    if(!profile) {
+        console.log("Test2")
+          return res
+          .status(400)
+          .json({ errors: [ { msg: 'Invalid Credentials'}] });
+      }
+
+
+    profile = new Profile ({
+        username: req.body.username,
+        location: req.body.location,
+        bio: req.body.bio
+    })
+    console.log("test_2")
     
-] ], 
-async (req, res) => {
-    const errors = validationResult(req);
-    if(!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-        }
-        const {
-            location,
-            bio,
-            status
-        } = req.body;
-
-//Build profile object
-        const profileFields = {};
-        profileFields.user = req.user.id;
-        if (location) profileFields.location= location;
-        if (bio) profileFields.bio= bio;
-        if (status) profileFields.status= status;
-
-        try {
-            let profile = await Profile.findOne({ user: req.user.id });
-
-            if(profile) {
-                //Update
-                profile = await Profile.findOneAndUpdate(
-                    { user: req.user.id }, 
-                    { $set: profileFields }, 
-                    { new: true }
-                ); 
-                return res.json(profile);
-            }
-
-            //Create
-            profile = new Profile(profileFields);
-
-            await profile.save();
-            res.json(profile);
-        } catch(err) {
-            console.error(err.message);
-            res.status(500).send('Server Error');
-        }
+    if (profile.username == req.body.username) {
+        await profile.save()
+        res.send(profile)
     }
-);
+    console.log("test_3")
 
-// @route   GET api/profile
-// @desc    GET all profiles
-// @access  Public
-router.get('/', async (req, res) => {
-    try {
-        const profiles = await Profile.find().populate('user', ['name', 'avatar']);
-        res.json(profiles);
-    } catch (error) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+    } catch (err) {
+  console.error(err.message);
+  res.status(500).send('Server Error');
     }
+})
+
+
+
+router.put('/:id', async (req, res) => {
+    const { error } = validationResult(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+
+    const profile = await Profile.findByIdAndUpdate(
+        req.body.id,
+        {
+            location: req.body.location,
+            bio: req.body.bio
+        },
+    );
+    console.log("Test5");
+    console.log(req.params.id);
+    console.log(profile);
+    if (!profile) return res.status(404).send("Invalid Credentials")
+        await profile.save();
+        res.send(profile);
 });
 
-// @route   GET api/profile/user/:user_id
-// @desc    GET profile by user ID
-// @access  Public
-router.get('/user/:user_id', async (req, res) => {
-    try {
-        const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar']);
-        if (!profile) return res.status(400).json({ msg: 'Profile not found' });
 
-        res.json(profile);
-    } catch (error) {
-        console.error(err.message);
-        if (err.kind == 'ObjectId') {
-            return res.status(400).json({ msg: 'Profile not found' });
+router.delete('/:id', [auth, admin], async (req, res) => {
+    // try {
+        const profile = await Profile.findByIdAndRemove(req.params.id)
+        console.log(req.params.id)
+        console.log(profile);
+        if (!profile) {
+            return res.status(404).json({msg: 'Profile not found'})
         }
-        res.status(500).send('Server Error');
-    }
-});
 
-// @route   DELETE api/profile
-// @desc    DELETE profile, user and posts
-// @access  Private
-router.delete('/', auth, async (req, res) => {
-    try {
-        //@todo - remove users posts
+        res.json({
+            msg: 'Profile Removed'
+        });
+} )
 
-        //Remove profile
-        await Profile.findOneAndRemove({ user: req.user.id });
-        //Remove user
-        await User.findOneAndRemove({ _id: req.user.id });
-        res.json({ msg: 'User deleted' });
-    } catch (error) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
 
-// @route   PUT api/profile/experience
-// @desc    PUT profile experiences
-// @access  Private
-//Did not add profile experience here because our app differs from video
-
-module.exports = router;
+  
+module.exports = router
