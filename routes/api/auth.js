@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 const auth = require('../../middleware/auth');
+
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
@@ -12,17 +13,17 @@ const User = require('../../models/User')
 // @desc    Test route
 // @access  Public
 
-// router.get('/', auth, async (req, res) => {
-//     try {
-//         const user = await User.findById(req.user.id).select('-password');
-//         res.json(user)
-//         console.log(user);
-//       } catch(err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error');
+router.get('/', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        res.json(user)
+        console.log(user);
+      } catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
 
-//     }
-// });
+    }
+});
 
 // @route POST api/auth
 // @desc Authenticate user & get token
@@ -44,10 +45,10 @@ router.post('/',
           console.log("Test1")
           console.log(user)
 
-          
+
 
         if(!user) {
-          console.log("Test2")
+      
             return res
             .status(400)
             .json({ errors: [ { msg: 'Invalid Credentials'}] });
@@ -67,7 +68,7 @@ router.post('/',
             id: user.id
           }
         }
-
+        console.log("Test2")
         jwt.sign(
           payload,
           config.get('jwtSecret'),
@@ -76,6 +77,8 @@ router.post('/',
             if(err) throw err;
             res.json({ token });
       })
+
+      console.log('success!')
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

@@ -4,14 +4,32 @@ const router = express.Router();
 const { validationResult } = require('express-validator');
 const Profile = require("../../models/Profile");
 const auth = require('../../middleware/auth');
+const admin = require('../../middleware/admin');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+
 
 router.get('/',  async (req, res) => {
     const profiles = await Profile.find().sort("name");
     res.send(profiles);
 });
 
+router.get('/:id', async (req, res) => {
+    try {
+      const profile = await Profile.findById(req.params.id);
+  
+      if (!profile) {
+        return res.status(404).json({
+          msg: 'Profile not found'
+        });
+      }
+  
+      res.json(profile);
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
 router.post('/', async(req, res) => {
     const {error} = validationResult(req.body);
     if (error){
@@ -71,7 +89,7 @@ router.put('/:id', async (req, res) => {
 });
 
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth, admin], async (req, res) => {
     // try {
         const profile = await Profile.findByIdAndRemove(req.params.id)
         console.log(req.params.id)
@@ -84,4 +102,7 @@ router.delete('/:id', async (req, res) => {
             msg: 'Profile Removed'
         });
 } )
+
+
+  
 module.exports = router
