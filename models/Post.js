@@ -17,6 +17,10 @@ const PostSchema = new Schema ({
         required: true,
         // unique: true
     },
+    date:{
+            type: Date,
+            default: Date.now
+    },
     likes: [
         {
         user: {

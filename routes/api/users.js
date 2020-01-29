@@ -9,19 +9,25 @@ const { validationResult } = require('express-validator');
 const User = require('../../models/User')
 
 /* GET users listing. */
-router.get('/',  function(req, res, next) {
-  res.send('respond with a resource');
+// router.get('/',  function(req, res, next) {
+//   res.send('respond with a resource');
+// });
+
+router.get('/',  async (req, res) => {
+  const users = await User.find().sort("name");
+  res.send(users);
 });
 
-// // get all users
-// router.get("/", auth, async (req, res) => {
-//   const users = await User.find().sort("name");
-//   res.send(users);
-// });
+// get all users
+router.get("/", auth, async (req, res) => {
+  const users = await User.find().sort("name");
+  res.send(users);
+});
 
 router.get('/me', auth, async (req, res) => {
     const user = await User.findById(req.user.id).select('-password');
     res.send(user);
+    console.log(user)
 });
 
 router.post('/signup', 
@@ -40,28 +46,25 @@ router.post('/signup',
 
 
       let user = await User.findOne({ email: req.body.email })
-      console.log(user);
+      // console.log(user);
 
       if(user) {
         res.status(400).json({ errors: [ { msg: 'User already exists'}] });
       }
+
+      const salt = await bcrypt.genSalt(10);
+
+      password = await bcrypt.hash(req.body.password, salt);
+      console.log(password)
 
       user = new User ({
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
           username: req.body.username,
-          password: req.body.password
+          password: password
       });
 
- 
-      bcrypt.genSalt(10, function(err, salt) {
-          bcrypt.hash(req.body.password, salt, function(err, hash) {
-              // Store hash in your password DB.
-          });
-      });
-       
-      console.log(user);
       await user.save();
       console.log("test_2")
 ;
