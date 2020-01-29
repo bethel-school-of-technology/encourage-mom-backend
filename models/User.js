@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
+
     firstName: {
         type: String,
         required: true
@@ -24,7 +25,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
-    isAdmin: Boolean
+    isAdmin: Boolean,
+    date: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = User = mongoose.model('user', UserSchema);

@@ -14,6 +14,23 @@ router.get('/',  async (req, res) => {
     res.send(profiles);
 });
 
+router.get('/me', auth, async (req, res) => {
+    try {
+        const profile = await (await Profile.findOne({user: req.user.id}))
+        // .populate(
+        //     'user',
+        //     ['username']
+        // );
+        console.log("successsssss!")
+        res.json(profile);
+        console.log(profile)
+    } catch(err) {
+        console.error(err.mesage);
+        console.log("fail!!!")
+        res.status(500).send('Server Error')
+    }
+})
+
 router.get('/:id', async (req, res) => {
     try {
       const profile = await Profile.findById(req.params.id);
@@ -30,6 +47,7 @@ router.get('/:id', async (req, res) => {
       res.status(500).send('Server Error');
     }
   });
+
 router.post('/', async(req, res) => {
     const {error} = validationResult(req.body);
     if (error){
