@@ -23,9 +23,8 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
-    }
-    // ,
-    // isAdmin: Boolean
+    },
+    isAdmin: Boolean
 });
 
 module.exports = User = mongoose.model('user', UserSchema);

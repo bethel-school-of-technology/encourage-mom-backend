@@ -4,8 +4,10 @@ const router = express.Router();
 const { validationResult } = require('express-validator');
 const Profile = require("../../models/Profile");
 const auth = require('../../middleware/auth');
+const admin = require('../../middleware/admin');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+
 
 router.get('/',  async (req, res) => {
     const profiles = await Profile.find().sort("name");
@@ -87,7 +89,7 @@ router.put('/:id', async (req, res) => {
 });
 
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth, admin], async (req, res) => {
     // try {
         const profile = await Profile.findByIdAndRemove(req.params.id)
         console.log(req.params.id)
