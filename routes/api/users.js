@@ -24,11 +24,11 @@ router.get("/", auth, async (req, res) => {
   res.send(users);
 });
 
-router.get('/me', auth, async (req, res) => {
-    const user = await User.findById(req.user.id).select('-password');
-    res.send(user);
-    console.log(user)
-});
+// router.get('/me', auth, async (req, res) => {
+//     const user = await User.findById(req.user.id).select('-password');
+//     res.send(user);
+//     console.log(user)
+// });
 
 router.post('/signup', 
 
