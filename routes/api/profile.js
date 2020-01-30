@@ -14,16 +14,18 @@ router.get('/',  async (req, res) => {
     res.send(profiles);
 });
 
-router.get('/me', auth, async (req, res) => {
+router.post('/me', auth, async (req, res) => {
     try {
-        const profile = await (await Profile.findOne({user: req.user.id}))
+        // console.log(req.body);
+        const profile = await (await Profile.findOne({username: req.body.profile}));
         // .populate(
         //     'user',
         //     ['username']
         // );
-        console.log("successsssss!")
+        console.log("successsssss!");
         res.json(profile);
-        console.log(profile)
+        console.log(profile);
+
     } catch(err) {
         console.error(err.mesage);
         console.log("fail!!!")

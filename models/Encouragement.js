@@ -4,3 +4,4 @@
 //bible verse refernece??
 //title???
 //text
+//date

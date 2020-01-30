@@ -43,7 +43,6 @@ router.post('/',
 
         let user = await User.findOne({ username: req.body.username});
           console.log("Test1")
-          console.log(user)
 
 
 
