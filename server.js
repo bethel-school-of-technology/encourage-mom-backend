@@ -3,13 +3,6 @@ const connectDB = require('./config/db');
 const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
-const dotenv = require("dotenv");
-// const path = require('path');
-
-// const auth = require("./routes/api/auth");
-const users = require("./routes/api/users");
-const profile = require("./routes/api/profile");
-// const posts = require("./routes/api/posts")
 
 
 mongoose.connect(
@@ -48,5 +41,3 @@ app.use('/api/auth', require('./routes/api/auth'));
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => 
 console.log(`Server started on port ${PORT}`));
-
-// module.exports = server;
