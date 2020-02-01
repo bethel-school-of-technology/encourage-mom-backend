@@ -13,7 +13,8 @@ const admin = require('../../middleware/admin');
 const Encouragement = require('../../models/Encouragement');
 
 router.get('/', async (req, res) => {
-    const encouragement = await Encouragement.find().sort("title");
+    const encouragement = await Encouragement.find()
+    .sort({date: -1});
     res.send(encouragement)
 });
 

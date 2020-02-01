@@ -10,14 +10,17 @@ const config = require('config');
 
 
 router.get('/',  async (req, res) => {
-    const profiles = await Profile.find().sort("name");
+    const profiles = await Profile.find().sort("username");
     res.send(profiles);
 });
 
 router.get('/me', auth, async (req, res) => {
     try {
         // console.log(req.body);
-        const profile = await Profile.findOne({user: req.body.id})
+        const profile = await Profile.findOne({user: req.body.profile})
+        // const profile = await Profile.findOne({user: req.body.username})
+        // const profile = await Profile.findOne({user: req.body.username})
+        // const profile = await Profile.findOne(req.profile.username)
         // populate(
         //     'user',
         //     ['username']
@@ -34,24 +37,26 @@ router.get('/me', auth, async (req, res) => {
 })
 
 
-router.get('/:username', auth, async (req, res) => {
-    try {
-        // console.log(req.body);
-        const profile = await (await Profile.findOne({username: req.body.profile}));
-        // .populate(
-        //     'user',
-        //     ['username']
-        // );
-        console.log("successsssss1!");
-        res.json(profile);
-        console.log(profile);
+// router.get('/:username', auth, async (req, res) => {
+//     try {
+//         // console.log(req.body);
+//         const profile = await (await Profile.findAll({user: req.body.username})
+//             // ({username: req.body.profile})
+//             );
+//         // .populate(
+//         //     'user',
+//         //     ['username']
+//         // );
+//         console.log("successsssss1!");
+//         res.json(profile);
+//         console.log(req.params.username);
 
-    } catch(err) {
-        console.error(err.mesage);
-        console.log("fail1!!!")
-        res.status(500).send('Server Error')
-    }
-})
+//     } catch(err) {
+//         console.error(err.mesage);
+//         console.log("fail1!!!")
+//         res.status(500).send('Server Error')
+//     }
+// })
 
 router.get('/:id', async (req, res) => {
     try {
@@ -130,7 +135,7 @@ router.put('/:username', async (req, res) => {
     });
 
 
-router.delete('/:id', [auth, admin], async (req, res) => {
+router.delete('/:id', [auth], async (req, res) => {
     // try {
         const profile = await Profile.findByIdAndRemove(req.params.id)
         console.log(req.params.id)
