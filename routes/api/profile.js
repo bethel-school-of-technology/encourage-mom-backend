@@ -14,10 +14,11 @@ router.get('/',  async (req, res) => {
     res.send(profiles);
 });
 
-router.get('/me', auth, async (req, res) => {
+router.post('/me', auth, async (req, res) => {
     try {
         // console.log(req.body);
-        const profile = await Profile.findOne({user: req.body.id})
+        const profile = await Profile.findOne({userData: req.body.profile})
+        // const profile = await Profile.findOne(req.profile.username)
         // populate(
         //     'user',
         //     ['username']
@@ -37,14 +38,16 @@ router.get('/me', auth, async (req, res) => {
 router.get('/:username', auth, async (req, res) => {
     try {
         // console.log(req.body);
-        const profile = await (await Profile.findOne({username: req.body.profile}));
+        const profile = await (await Profile.findOneByUsername({user: req.body.username})
+            // ({username: req.body.profile})
+            );
         // .populate(
         //     'user',
         //     ['username']
         // );
         console.log("successsssss1!");
         res.json(profile);
-        console.log(profile);
+        console.log(req.params.username);
 
     } catch(err) {
         console.error(err.mesage);

@@ -25,24 +25,24 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-router.get('/me', auth, async (req, res) => {
-  try {
-      // console.log(req.body);
-      const profile = await User.findOne({user: req.body.id})
-      // populate(
-      //     'user',
-      //     ['username']
-      // );
-      console.log("successsssss!");
-      res.json(user);
-      console.log(user);
+// router.get('/me', auth, async (req, res) => {
+//   try {
+//       // console.log(req.body);
+//       const profile = await User.findOne({user: req.body.id})
+//       // populate(
+//       //     'user',
+//       //     ['username']
+//       // );
+//       console.log("successsssss!");
+//       res.json(user);
+//       console.log(user);
 
-  } catch(err) {
-      console.error(err.mesage);
-      console.log("fail!!!")
-      res.status(500).send('Server Error')
-  }
-})
+//   } catch(err) {
+//       console.error(err.mesage);
+//       console.log("fail!!!")
+//       res.status(500).send('Server Error')
+//   }
+// })
 
 
 // @route POST api/auth
