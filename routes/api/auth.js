@@ -81,8 +81,15 @@ router.post('/',
             .status(400)
             .json({ errors: [ { msg: 'Username or Password is wrong'}] });
           }
-          
-        
+      
+      if (user.isAdmin === "true") {
+        console.log("You are an admin!")
+        console.log(user.isAdmin);
+          // res.render( '/authLanding')
+      } else {
+        console.log("You are not an admin")
+      }
+
 
         const payload = {
           user: {
@@ -92,12 +99,6 @@ router.post('/',
         console.log("Test2")
 
         
-      // if(req.user.isAdmin) {
-      //   // res.send ({isAdmin})
-      //   console.log("admin")
-      //   return res.json({admin});
-      
-      // }
         jwt.sign(
           payload,
           config.get('jwtSecret'),
@@ -107,7 +108,6 @@ router.post('/',
             res.json({ token });
       })
 
-     console.log(req.body.isAdmin)
       console.log('success!')
       console.log(user)
   } catch (err) {

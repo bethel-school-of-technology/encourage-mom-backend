@@ -26,8 +26,9 @@ const UserSchema = new mongoose.Schema({
         unique: true,
     },
     isAdmin: {
-        type: Boolean,
-        default: false
+        type: String,
+        // default: false,
+        required: false,
     },
     date: {
         type: Date,
