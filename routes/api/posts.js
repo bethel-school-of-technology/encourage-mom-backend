@@ -26,6 +26,28 @@ router.get('/:id', async (req, res) => {
     }
   });
 
+  router.get('/:username', auth, async (req, res) => {
+    try {
+        // console.log(req.body);
+        const posts= await (await Profile.findAll({user: req.body.username})
+            // ({username: req.body.profile})
+            );
+        // .populate(
+        //     'user',
+        //     ['username']
+        // );
+        console.log("successsssss1!");
+        res.json(posts);
+        console.log(req.params.username);
+        console.log(posts);
+
+    } catch(err) {
+        console.error(err.mesage);
+        console.log("fail1!!!")
+        res.status(500).send('Server Error')
+    }
+})
+
 router.post('/', async(req, res) => {
     const {error} = validationResult(req.body);
     if(error){
@@ -81,7 +103,7 @@ router.put('/:id', async (req, res) => {
     post.save()
     res.send(post)
 })
-router.delete('/:id', [auth, admin], async (req, res) => {
+router.delete('/:id', [auth], async (req, res) => {
     // try {
         const post = await Post.findByIdAndRemove(req.params.id)
         console.log(req.params.id)

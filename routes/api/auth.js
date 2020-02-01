@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 const auth = require('../../middleware/auth');
-
+const admin = require('../../middleware/admin');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
@@ -50,7 +50,7 @@ router.get('/', auth, async (req, res) => {
 // @access Public
 
 
-router.post('/', 
+router.post('/',
    async (req, res) => {
         const errors = validationResult(req.body)
         if(!errors.isEmpty()) {
@@ -74,7 +74,6 @@ router.post('/',
           });
             
         }
-        // alert("Invalid Credentials")
 
     const isMatch= await bcrypt.compare(req.body.password, user.password);
         if(!isMatch){
@@ -83,6 +82,7 @@ router.post('/',
             .json({ errors: [ { msg: 'Username or Password is wrong'}] });
           }
           
+        
 
         const payload = {
           user: {
@@ -90,6 +90,14 @@ router.post('/',
           }
         }
         console.log("Test2")
+
+        
+      // if(req.user.isAdmin) {
+      //   // res.send ({isAdmin})
+      //   console.log("admin")
+      //   return res.json({admin});
+      
+      // }
         jwt.sign(
           payload,
           config.get('jwtSecret'),
@@ -99,7 +107,9 @@ router.post('/',
             res.json({ token });
       })
 
+     console.log(req.body.isAdmin)
       console.log('success!')
+      console.log(user)
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

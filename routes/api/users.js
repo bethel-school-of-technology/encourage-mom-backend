@@ -20,7 +20,7 @@ router.get('/',  async (req, res) => {
 
 // get all users
 router.get("/", auth, async (req, res) => {
-  const users = await User.find().sort("name");
+  const users = await User.find().sort("username");
   res.send(users);
 });
 
@@ -38,14 +38,20 @@ router.post('/signup',
       console.log("test");
       return res.json({ errors: errors.array() });
     }
+  //   if (req.user.isAdmin === true){
+  //     return res.status(200).send("Welcome, Admin")
+  //   } else {
+  //      return res.status(404).send("Access Denied")
+  // }
 
-    try {
+  try {
       console.log(req.body);
       // req.body.password = bcrypt.hashSync(req.body.password, 10);
 
 
 
       let user = await User.findOne({ email: req.body.email })
+  
       // console.log(user);
 
       if(user) {
@@ -62,7 +68,8 @@ router.post('/signup',
           lastName: req.body.lastName,
           email: req.body.email,
           username: req.body.username,
-          password: password
+          password: password,
+          isAdmin: req.body.isAdmin
       });
 
       await user.save();
