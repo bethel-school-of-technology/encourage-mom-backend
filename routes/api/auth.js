@@ -25,6 +25,26 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
+router.get('/me', auth, async (req, res) => {
+  try {
+      // console.log(req.body);
+      const profile = await User.findOne({user: req.body.id})
+      // populate(
+      //     'user',
+      //     ['username']
+      // );
+      console.log("successsssss!");
+      res.json(user);
+      console.log(user);
+
+  } catch(err) {
+      console.error(err.mesage);
+      console.log("fail!!!")
+      res.status(500).send('Server Error')
+  }
+})
+
+
 // @route POST api/auth
 // @desc Authenticate user & get token
 // @access Public
@@ -47,12 +67,14 @@ router.post('/',
 
 
         if(!user) {
-      
+            console.log("Invalid Credentials")
             return res
             .status(400)
-            .json({ errors: [ { msg: 'Invalid Credentials'}] });
+            .json({ errors: [ { msg: 'Invalid Credentials'}] 
+          });
+            
         }
-
+        // alert("Invalid Credentials")
 
     const isMatch= await bcrypt.compare(req.body.password, user.password);
         if(!isMatch){
