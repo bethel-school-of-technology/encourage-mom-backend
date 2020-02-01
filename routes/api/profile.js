@@ -14,11 +14,11 @@ router.get('/',  async (req, res) => {
     res.send(profiles);
 });
 
-router.post('/me', auth, async (req, res) => {
+router.get('/me', auth, async (req, res) => {
     try {
         // console.log(req.body);
-        const profile = await (await Profile.findOne({username: req.body.profile}));
-        // .populate(
+        const profile = await Profile.findOne({user: req.body.id})
+        // populate(
         //     'user',
         //     ['username']
         // );
@@ -29,6 +29,26 @@ router.post('/me', auth, async (req, res) => {
     } catch(err) {
         console.error(err.mesage);
         console.log("fail!!!")
+        res.status(500).send('Server Error')
+    }
+})
+
+
+router.get('/:username', auth, async (req, res) => {
+    try {
+        // console.log(req.body);
+        const profile = await (await Profile.findOne({username: req.body.profile}));
+        // .populate(
+        //     'user',
+        //     ['username']
+        // );
+        console.log("successsssss1!");
+        res.json(profile);
+        console.log(profile);
+
+    } catch(err) {
+        console.error(err.mesage);
+        console.log("fail1!!!")
         res.status(500).send('Server Error')
     }
 })
@@ -89,12 +109,12 @@ try {
 
 
 
-router.put('/:id', async (req, res) => {
+router.put('/:username', async (req, res) => {
     const { error } = validationResult(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
-    const profile = await Profile.findByIdAndUpdate(
-        req.body.id,
+    const profile = await Profile.findOneAndUpdate(
+        req.body.username,
         {
             location: req.body.location,
             bio: req.body.bio
@@ -106,7 +126,8 @@ router.put('/:id', async (req, res) => {
     if (!profile) return res.status(404).send("Invalid Credentials")
         await profile.save();
         res.send(profile);
-});
+        // alert("Profile Updated Succesfully!")
+    });
 
 
 router.delete('/:id', [auth, admin], async (req, res) => {
