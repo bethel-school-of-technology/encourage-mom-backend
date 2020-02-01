@@ -21,8 +21,8 @@ app.use(express.json({
 }));
 
 app.get('/', (req, res) => res.send('API Running'));
-app.get('/api/auth', (req, res) => {
-    res.send({ express: 'Hello From auth file' });
+app.get('/api/encouragement', (req, res) => {
+    res.send({ express: 'Hello From encouragement file' });
   });
 
 // Define Routes
@@ -33,7 +33,7 @@ app.use('/api/users', require('./routes/api/users'));
 app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/auth', require('./routes/api/auth'));
-// app.use('/api/encouragement', require('./routes/api/encouragement'));
+app.use('/api/encouragement', require('./routes/api/encouragement'));
 
 
   
