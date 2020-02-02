@@ -6,7 +6,7 @@ const auth = require('../../middleware/auth');
 const admin = require('../../middleware/admin');
 
 router.get('/', async (req, res) => {
-    const posts = await Post.find().sort("title");
+    const posts = await Post.find().sort(({date: -1}));
     res.send(posts)
 });
 router.get('/:id', async (req, res) => {
