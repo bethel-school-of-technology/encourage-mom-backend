@@ -6,7 +6,7 @@ const auth = require('../../middleware/auth');
 
 
 router.get('/', async (req, res) => {
-    const contacts = await Contact.find().sort(({date: -1}));
+    const contacts = await Contact.find().sort(({date: 1}));
     res.send(contacts)
 });
 
