@@ -4,10 +4,6 @@ const mongoose = require('mongoose');
 
 
 const EncouragementSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        autoIncrement: true
-    },
     title: {
         type: String,
         unique: true,
