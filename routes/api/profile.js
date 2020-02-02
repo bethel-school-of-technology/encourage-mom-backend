@@ -143,7 +143,6 @@ router.delete('/:id', [auth], async (req, res) => {
         if (!profile) {
             return res.status(404).json({msg: 'Profile not found'})
         }
-
         res.json({
             msg: 'Profile Removed'
         });
