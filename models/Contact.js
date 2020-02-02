@@ -1,17 +1,19 @@
 const mongoose = require('mongoose');
 
-const ProfileSchema = new mongoose.Schema({
-    
-    username: {
+const ContactSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
         type: String,
         unique: true,
-        required: true
     },
-    location: {
-        type: String,
-        required: true
-    },
-    bio: {
+    comments: {
         type: String,
         unique: true,
         required: true,
@@ -22,4 +24,4 @@ const ProfileSchema = new mongoose.Schema({
     }
 });
 
-module.exports = Profile = mongoose.model('profile', ProfileSchema);
+module.exports = Contact = mongoose.model('contact', ContactSchema);

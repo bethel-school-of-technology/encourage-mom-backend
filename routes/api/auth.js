@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 const auth = require('../../middleware/auth');
+const admin = require('../../middleware/admin');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
@@ -12,24 +13,44 @@ const User = require('../../models/User')
 // @desc    Test route
 // @access  Public
 
-// router.get('/', auth, async (req, res) => {
-//     try {
-//         const user = await User.findById(req.user.id).select('-password');
-//         res.json(user)
-//         console.log(user);
-//       } catch(err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error');
+router.get('/', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        res.json(user)
+        console.log(user);
+      } catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
 
-//     }
-// });
+    }
+});
+
+// router.get('/me', auth, async (req, res) => {
+//   try {
+//       // console.log(req.body);
+//       const profile = await User.findOne({user: req.body.id})
+//       // populate(
+//       //     'user',
+//       //     ['username']
+//       // );
+//       console.log("successsssss!");
+//       res.json(user);
+//       console.log(user);
+
+//   } catch(err) {
+//       console.error(err.mesage);
+//       console.log("fail!!!")
+//       res.status(500).send('Server Error')
+//   }
+// })
+
 
 // @route POST api/auth
 // @desc Authenticate user & get token
 // @access Public
 
 
-router.post('/', 
+router.post('/',
    async (req, res) => {
         const errors = validationResult(req.body)
         if(!errors.isEmpty()) {
@@ -42,17 +63,17 @@ router.post('/',
 
         let user = await User.findOne({ username: req.body.username});
           console.log("Test1")
-          console.log(user)
 
-          
+
 
         if(!user) {
-          console.log("Test2")
+            console.log("Invalid Credentials")
             return res
             .status(400)
-            .json({ errors: [ { msg: 'Invalid Credentials'}] });
+            .json({ errors: [ { msg: 'Invalid Credentials'}] 
+          });
+            
         }
-
 
     const isMatch= await bcrypt.compare(req.body.password, user.password);
         if(!isMatch){
@@ -60,14 +81,24 @@ router.post('/',
             .status(400)
             .json({ errors: [ { msg: 'Username or Password is wrong'}] });
           }
-          
+      
+      if (user.isAdmin === "true") {
+        console.log("You are an admin!")
+        console.log(user.isAdmin);
+          // res.render( '/authLanding')
+      } else {
+        console.log("You are not an admin")
+      }
+
 
         const payload = {
           user: {
             id: user.id
           }
         }
+        console.log("Test2")
 
+        
         jwt.sign(
           payload,
           config.get('jwtSecret'),
@@ -76,6 +107,9 @@ router.post('/',
             if(err) throw err;
             res.json({ token });
       })
+
+      console.log('success!')
+      console.log(user)
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
