@@ -13,14 +13,15 @@ const User = require('../../models/User')
 //   res.send('respond with a resource');
 // });
 
-router.get('/',  async (req, res) => {
-  const users = await User.find().sort("name");
-  res.send(users);
-});
+// router.get('/',  async (req, res) => {
+//   const users = await User.find().sort("name");
+//   res.send(users);
+// });
 
 // get all users
 router.get("/", auth, async (req, res) => {
   const users = await User.find().sort("username");
+  console.log("Testing to see if loadUser is working")
   res.send(users);
 });
 

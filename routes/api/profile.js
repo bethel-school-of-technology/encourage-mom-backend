@@ -14,10 +14,10 @@ router.get('/',  async (req, res) => {
     res.send(profiles);
 });
 
-router.get('/me', auth, async (req, res) => {
+router.post('/me', async (req, res) => { 
     try {
         // console.log(req.body);
-        const profile = await Profile.findOne({user: req.body.profile})
+        const profile = await Profile.findOne({username: req.body.username})
         // const profile = await Profile.findOne({user: req.body.username})
         // const profile = await Profile.findOne({user: req.body.username})
         // const profile = await Profile.findOne(req.profile.username)
@@ -25,12 +25,13 @@ router.get('/me', auth, async (req, res) => {
         //     'user',
         //     ['username']
         // );
+        console.log(req.body)
         console.log("successsssss!");
         res.json(profile);
         console.log(profile);
 
     } catch(err) {
-        console.error(err.mesage);
+        console.error(err.message);
         console.log("fail!!!")
         res.status(500).send('Server Error')
     }
