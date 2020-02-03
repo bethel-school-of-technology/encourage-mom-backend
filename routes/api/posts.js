@@ -103,7 +103,7 @@ router.put('/:id', async (req, res) => {
     post.save()
     res.send(post)
 })
-router.delete('/:id', [auth], async (req, res) => {
+router.delete('/:id', async (req, res) => {
     // try {
         const post = await Post.findByIdAndRemove(req.params.id)
         console.log(req.params.id)
