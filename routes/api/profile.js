@@ -10,7 +10,7 @@ const config = require('config');
 
 
 router.get('/',  async (req, res) => {
-    const profiles = await Profile.find().sort("username");
+    const profiles = await Profile.find().sort({date: -1});
     res.send(profiles);
 });
 
