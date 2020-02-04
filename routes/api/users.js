@@ -4,108 +4,103 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 //This Error thrown in Terminal so updated below: express-validator: requires to express-validator/check are deprecated.You should just use require("express-validator") instead.
-const {
-  check,
-  validation
-} = require('express-validator');
-
-const User = require('../../models/User')
+const auth = require('../../middleware/auth');
+const { validationResult } = require('express-validator');
+const User = require('../../models/User');
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
+// router.get('/',  function(req, res, next) {
+//   res.send('respond with a resource');
+// });
+
+// router.get('/',  async (req, res) => {
+//   const users = await User.find().sort("name");
+//   res.send(users);
+// });
+
+// get all users
+router.get('/', async (req, res) => {
+	const users = await User.find().sort('username');
+	console.log('Testing to see if loadUser is working');
+	res.send(users);
 });
 
-router.get('/signup', function (req, res, next) {
-  res.render('signup')
-})
+// router.get('/me', auth, async (req, res) => {
+//     const user = await User.findById(req.user.id).select('-password');
+//     res.send(user);
+//     console.log(user)
+// });
 
-router.post('/signup', [
-    check('FirstName', 'First Name is required').not().isEmpty(),
-    check('LastName', 'Last Name is required').not().isEmpty(),
-    check('Email', 'Please include a valid email').not().isEmpty(),
-    check('Username', 'Username is Required').not().isEmpty(),
-    check('Password', 'Please enter a password with 6 or more characters').isLength({
-      min: 6
-    })
-  ],
-  async (req, res) => {
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array()
-      });
-    }
+router.post('/signup', async (req, res) => {
+	const errors = validationResult(req.body);
+	if (!errors.isEmpty()) {
+		console.log('test');
+		return res.json({ errors: errors.array() });
+	}
+	//   if (req.user.isAdmin === true){
+	//     return res.status(200).send("Welcome, Admin")
+	//   } else {
+	//      return res.status(404).send("Access Denied")
+	// }
 
-    const {
-      FirstName,
-      LastName,
-      Email,
-      Username,
-      Password
-    } = req.body;
+	try {
+		console.log(req.body);
+		// req.body.password = bcrypt.hashSync(req.body.password, 10);
 
-    try {
-      let user = await User.findOne({
-        email
-      })
+		let user = await User.findOne({ email: req.body.email });
 
-      if (user) {
-        res.status(400).json({
-          errors: [{
-            msg: 'User already exists'
-          }]
-        });
-      }
+		// console.log(user);
 
-      user = new User({
-        FirstName,
-        LastName,
-        Email,
-        Username,
-        Password
-      });
+		if (user) {
+			res.status(400).json({ errors: [ { msg: 'User already exists' } ] });
+		}
 
-      const salt = await bcrypt.genSalt(10);
+		const salt = await bcrypt.genSalt(10);
 
-      user.password = await bcrypt.hash(password, salt);
+		password = await bcrypt.hash(req.body.password, salt);
+		console.log(password);
 
-      await user.save();
+		user = new User({
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			email: req.body.email,
+			username: req.body.username,
+			password: password,
+			isAdmin: req.body.isAdmin
+		});
 
-      const payload = {
-        user: {
-          id: user.id
-        }
-      }
+		await user.save();
+		console.log('test_2');
+		console.log('test2');
+		const payload = {
+			user: {
+				id: user.id
+			}
+		};
 
-      jwt.sign(
-          payload,
-          config.get('jwtSecret'), {
-            expiresIn: 360000
-          }),
-        (err, token) => {
-          if (err) throw err;
-          res.json({
-            token
-          });
-        }
+		jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
+			if (err) throw err;
+			res.json({ token });
+		});
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send('Server error');
+	}
+});
 
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server error');
-      res
-    }
-  })
+router.get('/me', async (req, res) => {
+	try {
+		const user = await User.findOne({ username: req.body.username });
 
-router.get('/login', function (req, res, next) {
-  res.render('login')
-})
-
-router.post('/login', [
-  check('Username', 'Username is Required').not().isEmpty(),
-  check('Password', 'Password is Required').not().isEmpty(),
-], (req, res) => {
-
-})
+		// console.log(req.body)
+		console.log('successsssss!');
+		res.send(user);
+		console.log(req.body.user.username);
+	} catch (err) {
+		console.error(err.message);
+		console.log('fail!!!');
+		res.status(500).send('Server Error');
+	}
+});
 
 module.exports = router;
