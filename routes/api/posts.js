@@ -92,6 +92,7 @@ router.put('/:id', async (req, res) => {
     const post = await Post.findByIdAndUpdate(
         req.params.id,
         {
+            username: req.body.username,
             title: req.body.title,
             text: req.body.text
         },
@@ -100,9 +101,10 @@ router.put('/:id', async (req, res) => {
     console.log(req.params.id);
     console.log(post);
     if (!post) return res.status(404).send("Invalid Credentials")
-    post.save()
+    await post.save()
     res.send(post)
 })
+
 router.delete('/:id', async (req, res) => {
     // try {
         const post = await Post.findByIdAndRemove(req.params.id)
