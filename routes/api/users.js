@@ -19,7 +19,7 @@ const User = require('../../models/User')
 // });
 
 // get all users
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   const users = await User.find().sort("username");
   console.log("Testing to see if loadUser is working")
   res.send(users);
@@ -97,6 +97,24 @@ router.post('/signup',
       res.status(500).send('Server error');
     }
     
+
+    
+})
+
+router.get('/me', async (req, res) => { 
+  try {
+      const user = await User.findOne({username: req.body.username})
+
+      // console.log(req.body)
+      console.log("successsssss!");
+      res.send(user);
+      console.log(req.body.user.username);
+
+  } catch(err) {
+      console.error(err.message);
+      console.log("fail!!!")
+      res.status(500).send('Server Error')
+  }
 })
 
 
