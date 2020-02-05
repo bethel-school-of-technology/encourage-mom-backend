@@ -77,6 +77,7 @@ router.post('/',
 
     const isMatch= await bcrypt.compare(req.body.password, user.password);
         if(!isMatch){
+          alert("'Username or Password is wrong'")
             return res
             .status(400)
             .json({ errors: [ { msg: 'Username or Password is wrong'}] });
@@ -105,9 +106,9 @@ router.post('/',
           {expiresIn: 360000},
           (err, token) => {
             if(err) throw err;
-            res.json({ token });
+            res.json({ user, token });
       })
-
+      // res.send(user);
       console.log('success!')
       console.log(user)
   } catch (err) {

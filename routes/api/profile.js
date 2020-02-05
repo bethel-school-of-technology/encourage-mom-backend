@@ -10,14 +10,14 @@ const config = require('config');
 
 
 router.get('/',  async (req, res) => {
-    const profiles = await Profile.find().sort("username");
+    const profiles = await Profile.find().sort({date: -1});
     res.send(profiles);
 });
 
-router.get('/me', auth, async (req, res) => {
+router.post('/me', async (req, res) => { 
     try {
         // console.log(req.body);
-        const profile = await Profile.findOne({user: req.body.profile})
+        const profile = await Profile.findOne({username: req.body.username})
         // const profile = await Profile.findOne({user: req.body.username})
         // const profile = await Profile.findOne({user: req.body.username})
         // const profile = await Profile.findOne(req.profile.username)
@@ -25,12 +25,13 @@ router.get('/me', auth, async (req, res) => {
         //     'user',
         //     ['username']
         // );
+        console.log(req.body)
         console.log("successsssss!");
         res.json(profile);
         console.log(profile);
 
     } catch(err) {
-        console.error(err.mesage);
+        console.error(err.message);
         console.log("fail!!!")
         res.status(500).send('Server Error')
     }
@@ -58,7 +59,7 @@ router.get('/me', auth, async (req, res) => {
 //     }
 // })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', [auth], async (req, res) => {
     try {
       const profile = await Profile.findById(req.params.id);
   
@@ -67,7 +68,7 @@ router.get('/:id', async (req, res) => {
           msg: 'Profile not found'
         });
       }
-  
+
       res.json(profile);
     } catch (err) {
       console.log(err.message);
@@ -75,7 +76,7 @@ router.get('/:id', async (req, res) => {
     }
   });
 
-router.post('/', async(req, res) => {
+router.post('/', auth, async(req, res) => {
     const {error} = validationResult(req.body);
     if (error){
         console.log("test1");     
@@ -114,20 +115,21 @@ try {
 
 
 
-router.put('/:username', async (req, res) => {
+router.put('/:id', async (req, res) => {
     const { error } = validationResult(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
     const profile = await Profile.findOneAndUpdate(
-        req.body.username,
+        req.body.id,
         {
+            username: req.body.username,
             location: req.body.location,
             bio: req.body.bio
         },
     );
     console.log("Test5");
-    console.log(req.params.id);
-    console.log(profile);
+    // console.log(req.params.id);
+    // console.log(profile);
     if (!profile) return res.status(404).send("Invalid Credentials")
         await profile.save();
         res.send(profile);
