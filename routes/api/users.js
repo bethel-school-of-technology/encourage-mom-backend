@@ -17,10 +17,10 @@ router.get("/", async (req, res) => {
   res.send(users);
 });
 
-router.post('/me', async (req, res) => { 
+router.post('/me', auth, async (req, res) => { 
   try {
-      // const user = await User.findOne({username: req.body.username})
-      const user = await User.findOne({user: req.body.username})
+      const user = await User.findOne({username: req.body.username})
+      // const user = await User.findOne({user: req.body.username})
       // console.log(req.body.user.username);
       console.log("successsssss!");
       console.log(user);
