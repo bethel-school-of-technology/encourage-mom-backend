@@ -17,21 +17,24 @@ router.get("/", async (req, res) => {
   res.send(users);
 });
 
-router.get('/me', async (req, res) => { 
+router.post('/me', async (req, res) => { 
   try {
-      const user = await User.findOne({username: req.body.username})
-
-      // console.log(req.body)
+      // const user = await User.findOne({username: req.body.username})
+      const user = await User.findOne({user: req.body.username})
+      // console.log(req.body.user.username);
       console.log("successsssss!");
+      console.log(user);
       res.send(user);
-      console.log(req.body.user.username);
+
 
   } catch(err) {
       console.error(err.message);
-      console.log("fail!!!")
+      // console.log("fail!!!")
       res.status(500).send('Server Error')
   }
 })
+
+
 
 router.post('/signup', 
 

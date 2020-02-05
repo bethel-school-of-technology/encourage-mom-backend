@@ -64,7 +64,11 @@ router.post('/',
         let user = await User.findOne({ username: req.body.username});
           console.log("Test1")
 
+        // let adminUser = await User.findOne({"username": "Admin", "password": "admin"})
 
+        // if (adminUser) {
+        //   console.log("ADMIN!!!")
+        // }
 
         if(!user) {
             console.log("Invalid Credentials")
@@ -83,10 +87,9 @@ router.post('/',
             .json({ errors: [ { msg: 'Username or Password is wrong'}] });
           }
       
-      if (user.isAdmin === "true") {
+      if (user.isAdmin === true) {
         console.log("You are an admin!")
         console.log(user.isAdmin);
-          // res.render( '/authLanding')
       } else {
         console.log("You are not an admin")
       }
