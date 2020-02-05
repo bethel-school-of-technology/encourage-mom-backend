@@ -9,14 +9,6 @@ const { validationResult } = require('express-validator');
 const User = require('../../models/User')
 
 /* GET users listing. */
-// router.get('/',  function(req, res, next) {
-//   res.send('respond with a resource');
-// });
-
-// router.get('/',  async (req, res) => {
-//   const users = await User.find().sort("name");
-//   res.send(users);
-// });
 
 // get all users
 router.get("/", async (req, res) => {
@@ -25,11 +17,24 @@ router.get("/", async (req, res) => {
   res.send(users);
 });
 
-// router.get('/me', auth, async (req, res) => {
-//     const user = await User.findById(req.user.id).select('-password');
-//     res.send(user);
-//     console.log(user)
-// });
+router.post('/me', async (req, res) => { 
+  try {
+      // const user = await User.findOne({username: req.body.username})
+      const user = await User.findOne({user: req.body.username})
+      // console.log(req.body.user.username);
+      console.log("successsssss!");
+      console.log(user);
+      res.send(user);
+
+
+  } catch(err) {
+      console.error(err.message);
+      // console.log("fail!!!")
+      res.status(500).send('Server Error')
+  }
+})
+
+
 
 router.post('/signup', 
 
@@ -101,21 +106,6 @@ router.post('/signup',
     
 })
 
-router.get('/me', async (req, res) => { 
-  try {
-      const user = await User.findOne({username: req.body.username})
-
-      // console.log(req.body)
-      console.log("successsssss!");
-      res.send(user);
-      console.log(req.body.user.username);
-
-  } catch(err) {
-      console.error(err.message);
-      console.log("fail!!!")
-      res.status(500).send('Server Error')
-  }
-})
 
 
 

@@ -14,28 +14,28 @@ router.get('/',  async (req, res) => {
     res.send(profiles);
 });
 
-router.post('/me', async (req, res) => { 
-    try {
-        // console.log(req.body);
-        const profile = await Profile.findOne({username: req.body.username})
-        // const profile = await Profile.findOne({user: req.body.username})
-        // const profile = await Profile.findOne({user: req.body.username})
-        // const profile = await Profile.findOne(req.profile.username)
-        // populate(
-        //     'user',
-        //     ['username']
-        // );
-        console.log(req.body)
-        console.log("successsssss!");
-        res.json(profile);
-        console.log(profile);
+// router.post('/me', async (req, res) => { 
+//     try {
+//         // console.log(req.body);
+//         const profile = await Profile.findOne({username: req.body.username})
+//         // const profile = await Profile.findOne({user: req.body.username})
+//         // const profile = await Profile.findOne({user: req.body.username})
+//         // const profile = await Profile.findOne(req.profile.username)
+//         // populate(
+//         //     'user',
+//         //     ['username']
+//         // );
+//         console.log(req.body)
+//         console.log("successsssss!");
+//         res.json(profile);
+//         console.log(profile);
 
-    } catch(err) {
-        console.error(err.message);
-        console.log("fail!!!")
-        res.status(500).send('Server Error')
-    }
-})
+//     } catch(err) {
+//         console.error(err.message);
+//         console.log("fail!!!")
+//         res.status(500).send('Server Error')
+//     }
+// })
 
 
 // router.get('/:username', auth, async (req, res) => {
@@ -76,7 +76,7 @@ router.get('/:id', [auth], async (req, res) => {
     }
   });
 
-router.post('/', auth, async(req, res) => {
+router.post('/', async(req, res) => {
     const {error} = validationResult(req.body);
     if (error){
         console.log("test1");     
