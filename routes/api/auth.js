@@ -3,10 +3,12 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 const auth = require('../../middleware/auth');
-const admin = require('../../middleware/admin');
+// const admin = require('../../middleware/admin');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { check, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
+
+
 const User = require('../../models/User')
 
 // @route   GET api/auth
@@ -110,6 +112,7 @@ router.post('/',
           (err, token) => {
             if(err) throw err;
             res.json({ user, token });
+            console.log({token})
       })
       // res.send(user);
       console.log('success!')
