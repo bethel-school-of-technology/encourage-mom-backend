@@ -13,16 +13,16 @@ const User = require('../../models/User')
 // get all users
 router.get("/", async (req, res) => {
   const users = await User.find().sort("username");
-  console.log("Testing to see if loadUser is working")
   res.send(users);
 });
 
-router.post('/me', auth, async (req, res) => { 
+router.get('/me', auth, async (req, res) => { 
   try {
       const user = await User.findOne({username: req.body.username})
       // const user = await User.findOne({user: req.body.username})
       // console.log(req.body.user.username);
       console.log("successsssss!");
+   
       console.log(user);
       res.send(user);
 
@@ -81,7 +81,6 @@ router.post('/signup',
       await user.save();
       console.log("test_2")
 ;
-      console.log("test2");
       const payload = {
         user: {
           id: user.id
@@ -101,9 +100,6 @@ router.post('/signup',
       console.error(err.message);
       res.status(500).send('Server error');
     }
-    
-
-    
 })
 
 
