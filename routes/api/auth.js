@@ -83,7 +83,6 @@ router.post('/',
 
     const isMatch= await bcrypt.compare(req.body.password, user.password);
         if(!isMatch){
-          alert("'Username or Password is wrong'")
             return res
             .status(400)
             .json({ errors: [ { msg: 'Username or Password is wrong'}] });
@@ -92,6 +91,7 @@ router.post('/',
       if (user.isAdmin === true) {
         console.log("You are an admin!")
         console.log(user.isAdmin);
+
       } else {
         console.log("You are not an admin")
       }

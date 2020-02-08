@@ -16,22 +16,19 @@ router.get("/", async (req, res) => {
   res.send(users);
 });
 
-router.get('/me', auth, async (req, res) => { 
-  try {
-      const user = await User.findOne({username: req.body.username})
-      // const user = await User.findOne({user: req.body.username})
-      // console.log(req.body.user.username);
-      console.log("successsssss!");
+router.post('/me', async (req, res) => { 
+  // try {
+  //     const user = await User.findOne({username: req.body.username})
+ 
+  //     console.log("successsssss!");
    
-      console.log(user);
-      res.send(user);
+  //     console.log(user);
+  //     res.send(user);
 
-
-  } catch(err) {
-      console.error(err.message);
-      // console.log("fail!!!")
-      res.status(500).send('Server Error')
-  }
+  // } catch(err) {
+  //     console.error(err.message);
+  //     res.status(500).send('Server Error')
+  // }
 })
 
 
@@ -52,13 +49,8 @@ router.post('/signup',
 
   try {
       console.log(req.body);
-      // req.body.password = bcrypt.hashSync(req.body.password, 10);
-
-
 
       let user = await User.findOne({ email: req.body.email })
-  
-      // console.log(user);
 
       if(user) {
         res.status(400).json({ errors: [ { msg: 'User already exists'}] });
@@ -101,8 +93,5 @@ router.post('/signup',
       res.status(500).send('Server error');
     }
 })
-
-
-
 
  module.exports = router;
