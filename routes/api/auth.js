@@ -88,7 +88,7 @@ router.post('/',
             .json({ errors: [ { msg: 'Username or Password is wrong'}] });
           }
       
-      if (user.isAdmin === true) {
+      if (user.isAdmin == true) {
         console.log("You are an admin!")
         console.log(user.isAdmin);
 
