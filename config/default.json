@@ -1,0 +1,8 @@
+{
+    "mongoURI": "mongodb+srv://jhpkinsinger02:Gr8ontheSq@encouraging-moms-ywdax.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mySecretToken"
+}
+
+
+
+
