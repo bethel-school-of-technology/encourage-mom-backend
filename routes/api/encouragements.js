@@ -1,14 +1,8 @@
-// encouragment routes
-//get, post, edit/ and delete
-
-//
-
 
 const express = require("express");
 const router = express.Router();
 const { validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
-const admin = require('../../middleware/admin');
 
 const Encouragement = require('../../models/Encouragement');
 
@@ -44,16 +38,6 @@ router.get('/:id', async (req, res) => {
     }
 
     try {
-        // let encouragement = await Encouragement.findOne({id: req.body.id})
-        // console.log(encouragement)
-
-        // if(!encouragement) {
-        //     console.log('Test2')
-        //     return res
-        //     .status(400)
-        //     .json({ errors: [ { msg: 'Invalid Credentials'}] })
-        // }
-
         encouragement = new Encouragement ({
             title: req.body.title,
             text: req.body.text,
