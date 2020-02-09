@@ -94,4 +94,16 @@ router.post('/signup',
     }
 })
 
+router.delete('/:id', async (req, res) => {
+  const user = await User.findByIdAndRemove(req.params.id)
+  console.log(user);
+  if (!user) {
+      return res.status(404).json({msg: 'User not found'})
+  }
+  res.json({
+      msg: 'User Removed'
+  });
+} )
+
+
  module.exports = router;

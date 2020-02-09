@@ -1,7 +1,4 @@
-// encouragement model
-
 const mongoose = require('mongoose');
-
 
 const EncouragementSchema = new mongoose.Schema({
     title: {
@@ -26,9 +23,3 @@ const EncouragementSchema = new mongoose.Schema({
 });
 
 module.exports = Encouragement = mongoose.model('encouragement', EncouragementSchema);
-
-
-//bible verse refernece??
-//title???
-//text
-//date
