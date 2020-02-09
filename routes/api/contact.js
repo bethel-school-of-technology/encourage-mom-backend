@@ -10,28 +10,9 @@ router.get('/', async (req, res) => {
     res.send(contacts)
 });
 
-// router.get('/:id', async (req, res) => {
-//     try {
-//       const post = await Post.findById(req.params.id);
-
-//       if (!post) {
-//         return res.status(404).json({
-//           msg: 'Post not found'
-//         });
-//       }
-
-//       res.json(post);
-//     } catch (err) {
-//       console.log(err.message);
-//       res.status(500).send('Server Error');
-//     }
-//   });
-
-
 router.post('/', async(req, res) => {
     const {error} = validationResult(req.body);
     if(error){
-        console.log("Test1");
         return res.status(400).send(error.details[0].message)
     }
 
@@ -42,7 +23,6 @@ router.post('/', async(req, res) => {
             email: req.body.email,
             comments: req.body.comments
         })
-        console.log('Test3')
         await contact.save()
         res.send()
         alert("Message successful!")
@@ -66,7 +46,6 @@ router.put('/:id', async (req, res) => {
             text: req.body.text
         },
     );
-    console.log("Test5");
     console.log(req.params.id);
     console.log(post);
     if (!post) return res.status(404).send("Invalid Credentials")
@@ -75,7 +54,6 @@ router.put('/:id', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
-    // try {
         const contact = await Contact.findByIdAndRemove(req.params.id)
         console.log(req.params.id)
         console.log(contact);
@@ -86,8 +64,6 @@ router.delete('/:id', async (req, res) => {
             msg: 'Post Removed'
         });
 } )
-
-
 
 
 module.exports = router

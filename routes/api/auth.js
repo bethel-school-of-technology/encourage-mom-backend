@@ -3,11 +3,9 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 const auth = require('../../middleware/auth');
-// const admin = require('../../middleware/admin');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { validationResult } = require('express-validator');
-
 
 const User = require('../../models/User')
 
@@ -27,30 +25,9 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// router.get('/me', auth, async (req, res) => {
-//   try {
-//       // console.log(req.body);
-//       const profile = await User.findOne({user: req.body.id})
-//       // populate(
-//       //     'user',
-//       //     ['username']
-//       // );
-//       console.log("successsssss!");
-//       res.json(user);
-//       console.log(user);
-
-//   } catch(err) {
-//       console.error(err.mesage);
-//       console.log("fail!!!")
-//       res.status(500).send('Server Error')
-//   }
-// })
-
-
 // @route POST api/auth
 // @desc Authenticate user & get token
 // @access Public
-
 
 router.post('/',
    async (req, res) => {
@@ -64,21 +41,12 @@ router.post('/',
      
 
         let user = await User.findOne({ username: req.body.username});
-          console.log("Test1")
-
-        // let adminUser = await User.findOne({"username": "Admin", "password": "admin"})
-
-        // if (adminUser) {
-        //   console.log("ADMIN!!!")
-        // }
 
         if(!user) {
-            console.log("Invalid Credentials")
             return res
             .status(400)
             .json({ errors: [ { msg: 'Invalid Credentials'}] 
           });
-            
         }
 
     const isMatch= await bcrypt.compare(req.body.password, user.password);
@@ -90,8 +58,6 @@ router.post('/',
       
       if (user.isAdmin == true) {
         console.log("You are an admin!")
-        console.log(user.isAdmin);
-
       } else {
         console.log("You are not an admin")
       }
@@ -102,9 +68,7 @@ router.post('/',
             id: user.id
           }
         }
-        console.log("Test2")
 
-        
         jwt.sign(
           payload,
           config.get('jwtSecret'),
@@ -114,7 +78,6 @@ router.post('/',
             res.json({ user, token });
             console.log({token})
       })
-      // res.send(user);
       console.log('success!')
       console.log(user)
   } catch (err) {

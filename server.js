@@ -17,6 +17,7 @@ mongoose.connect(
 // Connect Database
 // connectDB();
 app.use(cors());
+
 // Init Middleware
 app.use(
   express.json({
