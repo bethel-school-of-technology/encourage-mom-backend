@@ -49,4 +49,3 @@ app.use('/api/encouragements', require('./routes/api/encouragements'));
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => 
 console.log(`Server started on port ${PORT}`));
-
