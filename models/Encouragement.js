@@ -1,25 +1,25 @@
 const mongoose = require('mongoose');
 
-const ProfileSchema = new mongoose.Schema({
-    
-    username: {
+const EncouragementSchema = new mongoose.Schema({
+    title: {
         type: String,
         unique: true,
         required: true
     },
-    location: {
-        type: String,
-        required: true
-    },
-    bio: {
+    text: {
         type: String,
         unique: true,
-        required: true,
+        required: true
+    },
+    reference: {
+        type: String,
+        unique: true,
+        required: true
     },
     date: {
-        type: Date,
+        type: String,
         default: Date.now
     }
 });
 
-module.exports = Profile = mongoose.model('profile', ProfileSchema);
+module.exports = Encouragement = mongoose.model('encouragement', EncouragementSchema);

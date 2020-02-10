@@ -1,72 +1,53 @@
-<<<<<<< HEAD
 {
-  "name": "encourage-moms-backend",
-  "version": "0.0.0",
+  "name": "client",
+  "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "start": "node server",
-    "server": "nodemon server"
-  },
   "dependencies": {
-    "D": "^1.0.0",
-    "bcryptjs": "^2.4.3",
-    "concurrently": "^5.0.2",
-    "config": "^3.2.4",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "^4.17.1",
-    "express-validator": "^6.3.0",
-    "gravatar": "^1.8.0",
-    "hbs": "~4.0.4",
-    "http-errors": "~1.6.3",
-    "i": "^0.3.6",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.2",
-    "morgan": "~1.9.1",
-    "request": "^2.88.0"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.1",
+    "build": "^0.1.4",
+    "connect": "^3.7.0",
+    "dotenv": "^8.2.0",
+    "env": "0.0.2",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-alert": "^6.0.0",
+    "react-alert-template-basic": "^1.0.0",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-dom": "^16.12.0",
+    "react-moment": "^0.9.7",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.3.0",
+    "react-start": "^1.1.2",
+    "react-transition-group": "^4.3.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.2"
-  }
-}
-=======
-{
-  "name": "encourage-moms-backend",
-  "version": "0.0.0",
-  "private": true,
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "dependencies": {
-<<<<<<< HEAD
-    "bcryptjs": "^2.4.3",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-=======
-    "D": "^1.0.0",
-    "audit": "0.0.6",
-    "bcryptjs": "^2.4.3",
-    "concurrently": "^5.0.2",
-    "config": "^3.2.4",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "^4.17.1",
-    "express-validator": "^6.3.0",
-    "fix": "0.0.6",
->>>>>>> 4164bb8049ec469be35815deff999b6745d534d5
-    "gravatar": "^1.8.0",
-    "hbs": "~4.0.4",
-    "http-errors": "~1.6.3",
-    "i": "^0.3.6",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.1",
-    "morgan": "~1.9.1",
-    "request": "^2.88.0"
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.2"
-  }
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "https://crowned-jewels.herokuapp.com/api"
 }
->>>>>>> dev
