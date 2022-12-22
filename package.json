@@ -27,7 +27,7 @@
     "http-errors": "~1.6.3",
     "i": "^0.3.6",
     "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.8.2",
     "morgan": "~1.9.1",
     "react-alert": "^6.0.0",
